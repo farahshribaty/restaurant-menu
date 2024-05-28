@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Discount extends Model
 {
     use HasFactory;
-    protected $fillable = ['discountable_type', 'discountable_id', 'percentage'];
+    protected $guarded = ['id'];
 
     public function discountable()
     {
         return $this->morphTo();
+    }
+
+    public function scopeGlobalDiscount($query)
+    {
+        return $query->where('discountable_type', 'all');
     }
 }

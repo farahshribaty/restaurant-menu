@@ -14,9 +14,11 @@ class ItemResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->name,
-            'price' => $this->price,
-            'category' => new CategoryResource($this->whenLoaded('category')),
+            'original_price' => $this->price,
+            'price_after_discount' => $this->price_after_discount,
             'discount' => $this->getEffectiveDiscount(),
+            'category' => new CategoryResource($this->whenLoaded('category')),
+            'category_id' => $this->category_id,
         ];
     }
 }

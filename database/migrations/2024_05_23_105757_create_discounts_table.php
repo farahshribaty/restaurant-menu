@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->string('discountable_type');
-            $table->unsignedBigInteger('discountable_id');
+            $table->morphs('discountable');
             $table->decimal('percentage', 5, 2);
             $table->timestamps();
         });

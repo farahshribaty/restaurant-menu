@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\Base\BasePaginationCollection;
+use App\Traits\EffectiveDiscount;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class CategoryResource extends JsonResource
             'depth' => $this->depth,
             'children' => CategoryResource::collection($this->whenLoaded('children')),
             'items' => ItemResource::collection($this->whenLoaded('items')),
-            // 'discount' => new DiscountResource($this->whenLoaded('discount')),
+            'discount' => $this->discount ? $this->discount->percentage : $this->getEffectiveDiscount(),
         ];    
     }
 }
